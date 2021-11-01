@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Order {
 
-    private List<Pizza> pizzaList;
+    private List<Pizza> pizzaList = new ArrayList<>();
 
-    public Order() {
-        this.pizzaList = new ArrayList<>();
+    public Order(List<Pizza> pizzaList) {
+        this.pizzaList = pizzaList;
     }
 
     public void printOrder() {

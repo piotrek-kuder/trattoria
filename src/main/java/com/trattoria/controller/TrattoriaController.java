@@ -31,7 +31,7 @@ public class TrattoriaController {
             finish = true;
         }
 
-        while (!finish) {  //todo - może if zamiast while?
+        if (!finish) {
 
             user = userService.createUser();
 
@@ -39,11 +39,9 @@ public class TrattoriaController {
                 pizzaList = pizzaService.createPizzaList();
 
                 if (userWantsContinue()) {
-                    orderService.createOrder(user, pizzaList);
+                    orderService.saveOrder(user, pizzaList);
                 }
             }
-
-            finish = true;
         }
 
         System.out.println("Closing application...");
@@ -54,9 +52,6 @@ public class TrattoriaController {
 
         input = scanner.nextLine();
 
-        if (input.equals("Y")) {
-            return true;
-        }
-        return false;
+        return input.equals("Y");
     }
 }
