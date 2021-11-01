@@ -6,7 +6,6 @@ import com.trattoria.service.OrderService;
 import com.trattoria.service.PizzaService;
 import com.trattoria.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,22 +24,39 @@ public class TrattoriaController {
     public void startPizzaOrder() {
 
         System.out.println("\nThis is the simple trattoria application\n"
-                + "Type START to start ordering a pizza or anything else to exit the program...");
+                + "Type S to start ordering a pizza or anything else to exit the program...");
         input = scanner.nextLine();
 
-        if (!input.equals("START")) {
+        if (!input.equals("S")) {
             finish = true;
         }
 
-        while (!finish) {
+        while (!finish) {  //todo - może if zamiast while?
 
             user = userService.createUser();
-            pizzaList = pizzaService.createPizzaList();
-            orderService.createOrder(user, pizzaList);
+
+            if (userWantsContinue()) {
+                pizzaList = pizzaService.createPizzaList();
+
+                if (userWantsContinue()) {
+                    orderService.createOrder(user, pizzaList);
+                }
+            }
 
             finish = true;
         }
 
         System.out.println("Closing application...");
+    }
+
+    private boolean userWantsContinue() {
+        System.out.println("Continue your order? Type Y if yes, anything else to exit application");
+
+        input = scanner.nextLine();
+
+        if (input.equals("Y")) {
+            return true;
+        }
+        return false;
     }
 }

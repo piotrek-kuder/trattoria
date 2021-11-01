@@ -6,15 +6,18 @@ import java.util.List;
 public class Pizza {
 
     private PizzaType pizzaType;
+    private String base;
     private List<String> ingredients = new ArrayList<>();
 
-    private Pizza(PizzaType pizzaType, List<String> ingredients) {
+    private Pizza(PizzaType pizzaType, String base, List<String> ingredients) {
         this.pizzaType = pizzaType;
+        this.base = base;
         this.ingredients = new ArrayList<>(ingredients);
     }
 
     public static class PizzaBuilder {
         private PizzaType pizzaType;
+        private String base;
         private List<String> ingredients = new ArrayList<>();
 
         public PizzaBuilder pizzaType(PizzaType pizzaType) {
@@ -22,18 +25,37 @@ public class Pizza {
             return this;
         }
 
-        public PizzaBuilder ingredienst(String ingredient) {
-            ingredients.add(ingredient);
+        public PizzaBuilder base(String base) {
+            this.base = base;
+            return this;
+        }
+
+        public PizzaBuilder ingredients(List<String> ingredients) {
+            this.ingredients = ingredients;
             return this;
         }
 
         public Pizza build() {
-            return new Pizza(pizzaType, ingredients);
+            return new Pizza(pizzaType, base, ingredients);
         }
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override
     public String toString() {
-        return null;              //todo
+        String ingr = "";
+        for (String s: ingredients) {
+            ingr = ingr + ", " + s;
+        }
+        return "name: " + pizzaType.getName()
+                + "   base: " + base
+                + "   ingredients: " + ingr.substring(2);
     }
 }
