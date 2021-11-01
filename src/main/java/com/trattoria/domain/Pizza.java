@@ -1,9 +1,10 @@
 package com.trattoria.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pizza {
+public class Pizza implements Serializable {
 
     private PizzaType pizzaType;
     private String base;

@@ -25,7 +25,9 @@ public class OrderService {
         Order order = createOrder(pizzaList);
 
         if (isOrderValid(order)) {
-            orderRepository.saveOrder(user, order);
+            orderRepository.saveOrderToFile(user, order);
+            System.out.println("Checking if order saved correctly");
+            orderRepository.readOrderFromFile();
         } else {
             System.out.println("Problem occurred, no pizza on the list, exiting program");
         }
